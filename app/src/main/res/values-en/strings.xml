@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nowcast</string>
+    <string name="redireccion_pantalla_registro">¿Still without an account?</string>
+    <string name="boton_login">Log In</string>
+    <string name="redireccion_pantalla_login">¿Already have an account?</string>
+    <string name="boton_registrar">Register</string>
+    <string name="hint_pw">Password</string>
+    <string name="hint_email">Email</string>
+    <string name="fichero_preferencias">com.tfg.aplicacio.PREFERENCE_FILE_KEY</string>
+</resources>

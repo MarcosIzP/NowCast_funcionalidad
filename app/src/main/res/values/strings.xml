@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Nowcast</string>
+    <string name="redireccion_pantalla_registro">¿Todavía no tienes cuenta?</string>
+    <string name="boton_login">Log In</string>
+    <string name="redireccion_pantalla_login">¿Ya tienes cuenta?</string>
+    <string name="boton_registrar">Registrarse</string>
+    <string name="hint_pw">Contraseña</string>
+    <string name="hint_email">Email</string>
+    <string name="fichero_preferencias">PREFERENCE_FILE_KEY</string>
+    <string name="id_cliente_web" translatable="false">36828474316-2tcie8802hdja88fnq2v418roh4gku51.apps.googleusercontent.com</string>
+</resources>
