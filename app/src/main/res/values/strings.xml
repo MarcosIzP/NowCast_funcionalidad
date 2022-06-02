@@ -2,6 +2,7 @@
     <string name="app_name">Nowcast</string>
     <string name="redireccion_pantalla_registro">¿Todavía no tienes cuenta?</string>
     <string name="boton_login">Log In</string>
+    <string name="boton_cerrar_sesion">Cerrar Sesión</string>
     <string name="redireccion_pantalla_login">¿Ya tienes cuenta?</string>
     <string name="boton_registrar">Registrarse</string>
     <string name="hint_pw">Contraseña</string>

@@ -2,11 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_auth"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/colorbackground"
-    tools:context=".autenticacion.AuthActivity">
+    tools:context=".autenticacion.RegistActivity"
+    android:background="@drawable/colorbackground">
 
     <ImageView
         android:id="@+id/logo"
@@ -20,7 +19,7 @@
         app:srcCompat="@drawable/nwlogo" />
 
     <EditText
-        android:id="@+id/email_regist"
+        android:id="@+id/email_login"
         android:layout_width="300sp"
         android:layout_height="40sp"
         android:layout_marginTop="32sp"
@@ -33,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/pw_regist"
+        android:id="@+id/pw_login"
         android:layout_width="300sp"
         android:layout_height="40sp"
         android:layout_marginTop="25sp"
@@ -43,71 +42,71 @@
         android:textColorLink="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_regist" />
+        app:layout_constraintTop_toBottomOf="@+id/email_login" />
 
     <Button
-        android:id="@+id/registrar"
+        android:id="@+id/btn_login"
         android:layout_width="155sp"
         android:layout_height="47sp"
         android:layout_marginTop="48dp"
         android:background="@drawable/colorbackground"
-        android:text="@string/boton_registrar"
+        android:text="@string/boton_login"
         app:cornerRadius="?attr/listPreferredItemPaddingEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pw_regist" />
+        app:layout_constraintTop_toBottomOf="@+id/pw_login" />
 
     <ImageButton
-        android:id="@+id/facebook_regist"
+        android:id="@+id/facebook_login"
         android:layout_width="70sp"
         android:layout_height="70sp"
         android:layout_marginStart="81sp"
         android:layout_marginTop="56sp"
         android:layout_marginEnd="40sp"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/google_regist"
+        app:layout_constraintEnd_toStartOf="@+id/google_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrar"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
-        android:id="@+id/google_regist"
+        android:id="@+id/google_login"
         android:layout_width="70sp"
         android:layout_height="70sp"
         android:layout_marginTop="56sp"
         android:layout_marginEnd="81sp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/facebook_regist"
-        app:layout_constraintTop_toBottomOf="@+id/registrar"
+        app:layout_constraintStart_toEndOf="@+id/facebook_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:srcCompat="@drawable/google" />
 
     <TextView
-        android:id="@+id/redir_login"
+        android:id="@+id/redir_registrarse"
         android:layout_width="284sp"
         android:layout_height="51sp"
         android:layout_marginStart="100sp"
         android:layout_marginTop="248dp"
         android:layout_marginEnd="100sp"
-        android:text="@string/redireccion_pantalla_login"
+        android:text="@string/redireccion_pantalla_registro"
         android:textAlignment="center"
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pw_regist" />
+        app:layout_constraintTop_toBottomOf="@+id/pw_login" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/btn_registrarse"
         android:layout_width="155sp"
         android:layout_height="47sp"
         android:layout_marginTop="16sp"
         android:background="@drawable/colorbackground"
-        android:text="@string/boton_login"
+        android:text="@string/boton_registrar"
         app:cornerRadius="?attr/listPreferredItemPaddingEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/redir_login" />
+        app:layout_constraintTop_toBottomOf="@+id/redir_registrarse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
