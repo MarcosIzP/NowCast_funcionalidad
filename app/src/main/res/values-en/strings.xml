@@ -9,4 +9,8 @@
     <string name="hint_pw">Password</string>
     <string name="hint_email">Email</string>
     <string name="fichero_preferencias">com.tfg.aplicacio.PREFERENCE_FILE_KEY</string>
+    <!-- Pop Up de error-->
+    <string name="titulo_error">Error</string>
+    <string name="cuerpo_error">An error has ocurred when trying to authenticate</string>
+    <string name="btn_aceptar">Accept</string>
 </resources>

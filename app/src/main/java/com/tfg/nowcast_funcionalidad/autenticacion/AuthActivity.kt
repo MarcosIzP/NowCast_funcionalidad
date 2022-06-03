@@ -6,9 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.tfg.nowcast_funcionalidad.HomeActivity
@@ -20,6 +26,8 @@ class AuthActivity : AppCompatActivity() {
 
 
     private val GOOGLE_SIGN_IN_CODE = 100
+
+    private val callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +93,56 @@ class AuthActivity : AppCompatActivity() {
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN_CODE)
         }
 
+        facebook_regist.setOnClickListener {
+
+            //Utilizamos el método logInWithReadPermission para quenos muestre en pantalla el método de login de facebook
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+
+            //LLamaremos a un callback para cuando se realice el login, según su resultado se ejecuten distintas funciones
+            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+
+                //Nos devolverá a la pantalla de registro
+                override fun onCancel() {
+                    AuthActivity()
+                }
+
+                //nos dará un mensaje de error
+                override fun onError(error: FacebookException) {
+                    alerta()
+                }
+
+                //se guardarán esos datos de inicio de sesión con facebook en firebase
+                override fun onSuccess(result: LoginResult) {
+                    result?.let {
+
+                        val token = it.accessToken
+
+                        //Una vez se inicia sesión en facebook ahora con esas credenciales se iniciará sesión en Firebase
+                        val credenciales = FacebookAuthProvider.getCredential(token.token)
+
+                        //Autenticacion en firebase. Le pasasmos la constante creada, para que el ususario salga en la consola de Firebase
+                        FirebaseAuth.getInstance().signInWithCredential(credenciales)
+                            .addOnCompleteListener {
+                                //Se ejecuta la funcion "Addoncompletelistener()" para saber cuando ha finalizado la utenticacion en firebase
+                                if (it.isSuccessful) {
+
+                                    //Si los datos son correctos se llama a la funcion "showhome" que contiene en intent
+                                    // y el tipo proveedor que se ha indicado en la otra actividad (Facebook)
+                                    //En este caso queremos inciar sesión en firebase con los credenciales de FB,
+                                    // utilizamos el método de obtenciónnde email de el login Básico
+                                    showHome(it.result?.user?.email ?: "", ProviderType.FACEBOOK)
+
+                                } else {
+                                    //Si ocurre algún error se ejecuta la funcion creada "alerta()"
+                                    alerta()
+
+                                }
+                            }
+                    }
+                }
+            })
+        }
+
     }
 
     private fun goToRegistActivity(){
@@ -98,9 +156,9 @@ class AuthActivity : AppCompatActivity() {
     private fun alerta() {
 
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Error")
-        builder.setMessage("Se ha producido un error autenticando al usuario")
-        builder.setPositiveButton("Aceptar", null)
+        builder.setTitle(getString(R.string.titulo_error))
+        builder.setMessage(getString(R.string.cuerpo_error))
+        builder.setPositiveButton(getString(R.string.btn_aceptar), null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
@@ -121,6 +179,10 @@ class AuthActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        //Gracias a esta instrucción, según el resultado del login con facebook, se ejecutará una de las funciones creadas en el boton de facebook
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+
         super.onActivityResult(requestCode, resultCode, data)
 
         //Se comprueba que el codigo de esa actividad es igual a la constante global creada, si es igual,

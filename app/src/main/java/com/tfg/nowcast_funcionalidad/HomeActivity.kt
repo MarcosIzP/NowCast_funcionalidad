@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import com.facebook.login.LoginManager
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.MediaMetadata
 import com.google.android.exoplayer2.Player
@@ -23,8 +24,8 @@ enum class ProviderType {
 //BASIC : autenticacion por email y contraseña
 //GOOGLE : cuenta de google
     BASIC,
-    GOOGLE
-
+    GOOGLE,
+    FACEBOOK
 }
 
 class HomeActivity : AppCompatActivity(), Player.Listener {
@@ -80,6 +81,10 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
             val preferencias = getSharedPreferences(getString(R.string.fichero_preferencias), Context.MODE_PRIVATE).edit()
             preferencias.clear()
             preferencias.apply()
+
+            if (provider == ProviderType.FACEBOOK.name) {
+                LoginManager.getInstance().logOut()
+            }
 
             //Llamada a los sevicios de firebase
             FirebaseAuth.getInstance().signOut()
